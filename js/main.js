@@ -6,13 +6,18 @@ $(document).ready(function () {
     var counterUp = $(".counter-up");
     var counterDown = $(".counter-down");
     var modal = $(".modal");
-    var modalCloseBtn = $(".modal-close-button")
-    var viewFlatsBtn = $(".view-flats")
+    var modalCloseBtn = $(".modal-close-button");
+    var viewFlatsBtn = $(".view-flats");
    
+    
+    
+    
+     
     floorPath.on("mouseover", function(){
         currentFloor = $(this).attr("data-floor");
         floorPath.removeClass("current-floor");
         $(".counter").text(currentFloor);
+        flatsNumber(currentFloor);
     }); 
 
     flatLink.on("mouseover", function() {
@@ -50,6 +55,7 @@ $(document).ready(function () {
         $(".counter").text(usCurrentFloor);
         floorPath.removeClass("current-floor");
         $(`[data-floor=${usCurrentFloor}]`).toggleClass("current-floor");
+        var flatRange = flatsNumber(currentFloor);
         }
     });
 
@@ -61,11 +67,26 @@ $(document).ready(function () {
         $(".counter").text(usCurrentFloor);
         floorPath.removeClass("current-floor");
         $(`[data-floor=${usCurrentFloor}]`).toggleClass("current-floor");
+        var flatRange = flatsNumber(currentFloor);
         }
     });
 
      function  toggleModal () {
         modal.toggleClass("is-open");
     }
+
+    function flatsNumber(currentFloor) {
+        flatRange = (currentFloor-2) * 10;
+        
+        for (i=1; i<11; i++) {
+           usCurrentFlat = [+$(`[data-flat-number = ${i}]`).attr("data-flat-number")];
+           flatNumber = flatRange + +usCurrentFlat; 
+           $(`[data-flat-number=${i}]`).text(flatNumber);
+
+       
+    }
+    }
+
 });
 
+    
